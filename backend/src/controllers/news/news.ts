@@ -59,6 +59,7 @@ export async function getNews(req:Request,res:Response){
             message:"News data found",
             data:result
         });
+        
     }catch(err){
         console.log(err);
         res.status(500).json({message:"Internal server error"});

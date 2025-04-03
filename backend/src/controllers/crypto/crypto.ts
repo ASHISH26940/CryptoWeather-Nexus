@@ -10,7 +10,7 @@ export async function getCryptoPrice(req:Request,res:Response){
     try{
         if(process.env.CRYPTO_API===undefined){
             throw new Error("API key not found");
-        }
+        } 
         const key= process.env.CRYPTO_API;
         console.log(key);
         const crypto=await axios.get(`https://rest.coincap.io/v3/assets?apiKey=${key}`) as unknown as any;    

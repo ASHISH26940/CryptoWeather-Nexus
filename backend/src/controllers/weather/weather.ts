@@ -38,7 +38,7 @@ export async function geoLoaction(req:geoLocationType,res:Response){
         if(!location){
             res.status(400).json({message:"Location not found"});
             throw new Error("Location not found");
-        }
+        } 
         if(process.env.WEATHER_API===undefined){
             throw new Error("API key not found");
         }
