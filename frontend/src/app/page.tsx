@@ -449,7 +449,7 @@ export default function Dashboard() {
                         <div className="flex items-center">
                           {cityWeather.weather?.[0]?.icon && (
                             <div className="mr-3">
-                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                               <img
                                 src={`https://openweathermap.org/img/wn/${cityWeather.weather[0].icon}@2x.png`}
                                 alt={cityWeather.weather[0].description || "Weather icon"}
@@ -603,7 +603,7 @@ export default function Dashboard() {
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                           {article.image_url && (
                             <div className="md:col-span-1">
-                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                               <img
                                 src={article.image_url || "/placeholder.svg"}
                                 alt={article.title}
