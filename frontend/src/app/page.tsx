@@ -1,134 +1,11 @@
-// "use client";
-// import { useEffect } from "react";
-// import { useAppSelector, useAppDispatch } from "../lib/hooks";
-// import { fetchWeather, fetchCrypto, fetchNews } from "../lib/features/preferences/preferencesSlice";
-// import type { NewsArticle, NewsAPIResponse, NewsData } from "../lib/features/preferences/preferencesSlice"
-// export default function Home() {
-//   const dispatch = useAppDispatch();
-//   const { weather, crypto, news, loading, error } = useAppSelector((state) => state.preferences);
-//   console.log("weather in page", weather);
+"use client";
 
-//   useEffect(() => {
-//     dispatch(fetchWeather());
-//     dispatch(fetchCrypto());
-//     dispatch(fetchNews());
-//   }, [dispatch]);
-
-//   return (
-//     <></>
-//     // <main className="p-4 max-w-6xl mx-auto">
-//     //   <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-
-//     //   {/* Weather Section */}
-//     //   <section className="mb-8 bg-white p-4 rounded shadow">
-//     //     <h2 className="text-2xl font-semibold mb-4">Weather</h2>
-//     //     {loading ? (
-//     //       <p>Loading...</p>
-//     //     ) : error ? (
-//     //       <p className="text-red-500">{error}</p>
-//     //     ) : weather ? (
-//     //       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//     //         {weather.map((cityWeather, idx) => (
-//     //           <div key={idx} className="border p-4 rounded">
-//     //             <div key={idx} className="border p-4 rounded">
-//     //               <h3 className="font-medium">{cityWeather.name || cityWeather.message || "Location"}</h3>
-//     //               <div className="mt-2">
-//     //                 {/* Access temperature from the correct path */}
-//     //                 <p className="text-2xl">{cityWeather.main?.temp}°C</p>
-//     //                 {/* Weather is an array, access the first item's description */}
-//     //                 <p>{cityWeather.weather?.[0]?.description || "No description"}</p>
-//     //                 <div className="mt-2 text-sm">
-//     //                   <p>Feels like: {cityWeather.main?.feels_like}°C</p>
-//     //                   <p>Humidity: {cityWeather.main?.humidity}%</p>
-//     //                   <p>Wind: {cityWeather.wind?.speed || 0} m/s</p>
-//     //                 </div>
-//     //               </div>
-//     //             </div>
-//     //           </div>
-//     //         ))}
-//     //       </div>
-//     //     ) : (
-//     //       <p>No weather data available</p>
-//     //     )}
-//     //   </section>
-
-//     //   {/* Crypto Section */}
-//     //   <section className="mb-8 bg-white p-4 rounded shadow">
-//     //     <h2 className="text-2xl font-semibold mb-4">Cryptocurrency</h2>
-//     //     {loading ? (
-//     //       <p>Loading...</p>
-//     //     ) : error ? (
-//     //       <p className="text-red-500">{error}</p>
-//     //     ) : crypto && crypto.length > 0 ? (
-//     //       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-//     //         {crypto.map((coin) => (
-//     //           <div key={coin.id} className="border p-4 rounded">
-//     //             <strong className="font-medium">{coin.name}</strong>
-//     //             <p className="text-xl mt-1">${parseFloat(coin.priceUsd).toFixed(2)}</p>
-//     //             <p className={parseFloat(coin.changePercent24Hr) >= 0 ? "text-green-600" : "text-red-600"}>
-//     //               {parseFloat(coin.changePercent24Hr) >= 0 ? "▲" : "▼"} {Math.abs(parseFloat(coin.changePercent24Hr)).toFixed(2)}%
-//     //             </p>
-//     //           </div>
-//     //         ))}
-//     //       </div>
-//     //     ) : (
-//     //       <p>No cryptocurrency data available</p>
-//     //     )}
-//     //   </section>
-
-//     //   {/* News Section */}
-//     //   <section className="bg-white p-4 rounded shadow">
-//     //     <h2 className="text-2xl font-semibold mb-4">News</h2>
-//     //     {loading ? (
-//     //       <p>Loading...</p>
-//     //     ) : error ? (
-//     //       <p className="text-red-500">{error}</p>
-//     //     ) : news && news.length > 0 ? (
-//     //       <div className="space-y-4">
-//     //         {news.map((article, idx: number) => (
-//     //           <div key={idx} className="border-b pb-3">
-//     //             <a
-//     //               href={article.link}
-//     //               target="_blank"
-//     //               rel="noopener noreferrer"
-//     //               className="text-blue-600 hover:underline font-medium"
-//     //             >
-//     //               {article.title}
-//     //             </a>
-//     //             {article.description && (
-//     //               <p className="text-sm text-gray-600 mt-1">{article.description}</p>
-//     //             )}
-//     //             {article.image_url && (
-//     //               <img
-//     //                 src={article.image_url}
-//     //                 alt={article.title}
-//     //                 className="mt-2 rounded max-h-40 object-cover"
-//     //               />
-//     //             )}
-//     //           </div>
-//     //         ))}
-//     //       </div>
-//     //     ) : (
-//     //       <p>No news data available</p>
-//     //     )}
-//     //   </section>
-//     // </main>
-//   );
-// }
-
-
-
-
-"use client"
-
-import { useState, useEffect, useRef } from "react"
-import { Bell, CloudSun, Star } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { toast } from "sonner";
-import {toast as hotToast} from "react-hot-toast";
-import Link from "next/link"
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { Bell, CloudSun, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { toast,ToastPosition } from "react-hot-toast";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -136,147 +13,179 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { Skeleton } from "@/components/ui/skeleton"
-import { useAppSelector, useAppDispatch } from "../lib/hooks"
-import { fetchWeather, fetchCrypto, fetchNews } from "../lib/features/preferences/preferencesSlice"
-import {  } from "../lib/features/preferences/preferencesSlice"
-// Types for our data
-interface WeatherData {
-  name: string
-  main: {
-    temp: number
-    feels_like: number
-    humidity: number
-  }
-  weather: {
-    description: string
-    icon: string
-  }[]
-  wind: {
-    speed: number
-  }
-  isFavorite?: boolean
-}
+} from "@/components/ui/dropdown-menu";
+import { useAppSelector, useAppDispatch } from "../lib/hooks";
+import { fetchWeather, fetchCrypto, fetchNews } from "../lib/features/preferences/preferencesSlice";
+import type {
+  NewsArticle,
+  WeatherData,
+  CryptoCurrency
+} from "../lib/features/preferences/preferencesSlice";
 
-interface CryptoData {
-  id: string
-  name: string
-  symbol: string
-  priceUsd: string
-  changePercent24Hr: string
-  marketCapUsd: string
-  isFavorite?: boolean
-}
-
-interface NewsArticle {
-  title: string
-  description: string
-  link: string
-  image_url?: string
-  pubDate: string
-}
+// Enhanced Notification type with severity tracking
+type NotificationSeverity = "low" | "moderate" | "high" | "extreme";
 
 interface Notification {
-  id: string
-  type: "price_alert" | "weather_alert"
-  message: string
-  timestamp: Date
-  read: boolean
-}
-
-interface WeatherStateType{
-  main:string,
-  description:string
+  id: string;
+  type: "price_alert" | "weather_alert" | "news_alert";
+  message: string;
+  severity: NotificationSeverity;
+  timestamp: Date;
+  read: boolean;
+  icon?: string;
+  relatedData?: WeatherData | CryptoCurrency | NewsArticle;
 }
 
 export default function Dashboard() {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const { weather, crypto, news, loading, error } = useAppSelector((state) => state.preferences);
-  const [notifications, setNotifications] = useState<Notification[]>([])
-  const [unreadCount, setUnreadCount] = useState(0)
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
   const [activeTab, setActiveTab] = useState("all");
-  const [weatheState,setWeatherState]=useState<WeatherStateType|null>(null);
-  const preWeatherState=useRef<WeatherStateType|null>(null);
-  const fetchWeatherFunction=async(weath:any)=>{
-    try{
+  
+  // Properly typed refs
+  const prevWeather = useRef<WeatherData[] | null>(null);
+  const prevCryptoPrices = useRef<Record<string, number>>({});
+  const prevNewsIds = useRef<Set<string>>(new Set());
 
-    }catch(err){
-      console.error("Error fetching weather data:", err)
-    }
-  }
   useEffect(() => {
-    fetchWeatherFunction() // Fetch immediately
+    dispatch(fetchWeather());
+    dispatch(fetchCrypto());
+    dispatch(fetchNews());
+  }, [dispatch]);
 
-    const interval = setInterval(fetchWeatherFunction, 30000) // Fetch every 30 seconds
-    return () => clearInterval(interval) // Cleanup interval on unmount
-  }, [])
   useEffect(() => {
-    dispatch(fetchWeather())
-    dispatch(fetchCrypto())
-    dispatch(fetchNews())
-  }, [dispatch])
-
-  // Fetch data on component mount
-  useEffect(() => {
-    // Set up WebSocket for real-time updates (simulated)
-    const wsInterval = setInterval(() => {
-      // Simulate receiving a WebSocket message
-      const randomEvent = Math.random()
-
-      if (randomEvent > 0.7) {
-        const newNotification = {
-          id: Date.now().toString(),
-          type: randomEvent > 0.85 ? ("weather_alert" as const) : ("price_alert" as const),
-          message:
-            randomEvent > 0.85
-              ? `Weather alert: ${["Rain", "Snow", "High winds", "Heat wave"][Math.floor(Math.random() * 4)]} expected in ${["New York", "London", "Tokyo"][Math.floor(Math.random() * 3)]}`
-              : `${["Bitcoin", "Ethereum", "Solana"][Math.floor(Math.random() * 3)]} ${randomEvent > 0.8 ? "increased" : "decreased"} by ${(Math.random() * 5).toFixed(2)}%`,
-          timestamp: new Date(),
-          read: false,
+    if (weather && prevWeather.current) {
+      weather.forEach((cityWeather, index) => {
+        const prevCityWeather = prevWeather.current?.[index];
+        if (prevCityWeather && cityWeather.main.temp !== prevCityWeather.main.temp) {
+          const tempChange = cityWeather.main.temp - prevCityWeather.main.temp;
+          const severity = isSignificantWeatherChange(tempChange) ? "high" : "moderate";
+          
+          createNotification({
+            type: "weather_alert",
+            severity,
+            message: `Temperature in ${cityWeather.name} changed by ${tempChange.toFixed(1)}°C`,
+            icon: getWeatherIcon(cityWeather.weather[0]?.main),
+            relatedData: cityWeather
+          });
         }
+      });
+    }
+    prevWeather.current = weather;
+  }, [weather]);
 
-        setNotifications((prev) => [newNotification, ...prev])
-        setUnreadCount((prev) => prev + 1)
+  // Enhanced crypto monitoring
+  useEffect(() => {
+    if (crypto) {
+      crypto.forEach((coin) => {
+        const prevPrice = prevCryptoPrices.current[coin.id];
+        const currentPrice = parseFloat(coin.priceUsd);
+        
+        if (prevPrice && prevPrice !== currentPrice) {
+          const change = ((currentPrice - prevPrice) / prevPrice) * 100;
+          if (isSignificantPriceChange(change)) {
+            const severity = Math.abs(change) >= 5 ? "high" : "moderate";
+            
+            createNotification({
+              type: "price_alert",
+              severity,
+              message: `${coin.symbol} ${change > 0 ? "▲" : "▼"} ${Math.abs(change).toFixed(2)}%`,
+              icon: change > 0 ? "📈" : "📉",
+              relatedData: coin
+            });
+          }
+        }
+        prevCryptoPrices.current[coin.id] = currentPrice;
+      });
+    }
+  }, [crypto]);
 
-        // message: newNotification.type === "weather_alert" ? "Weather Alert" : "Price Alert",
-        // data: newNotification.message,
-        toast(
-          `${newNotification.type === "weather_alert" ? "Weather Alert" : "Price Alert"}: ${newNotification.message}`,
-        )
-      }
-    }, 30000) // Every 30 seconds
+  // Enhanced news monitoring
+  useEffect(() => {
+    if (news) {
+      news.forEach((article) => {
+        if (!prevNewsIds.current.has(article.article_id)) {
+          createNotification({
+            type: "news_alert",
+            severity: "moderate",
+            message: `New article: ${article.title}`,
+            icon: "📰",
+            relatedData: article
+          });
+          prevNewsIds.current.add(article.article_id);
+        }
+      });
+    }
+  }, [news]);
 
-    return () => clearInterval(wsInterval)
-  }, [toast])
+  const createNotification = ({
+    type,
+    severity,
+    message,
+    icon = '',
+    relatedData
+  }: {
+    type: Notification["type"];
+    severity: NotificationSeverity;
+    message: string;
+    icon?: string;
+    relatedData?: WeatherData | CryptoCurrency | NewsArticle;
+  }) => {
+    const newNotification: Notification = {
+      id: Date.now().toString(),
+      type,
+      severity,
+      message: `${icon} ${message}`,
+      timestamp: new Date(),
+      read: false,
+      icon,
+      relatedData
+    };
 
-  // Mark all notifications as read
+    setNotifications(prev => [newNotification, ...prev]);
+    setUnreadCount(prev => prev + 1);
+
+    const toastOptions = {
+      duration: severity === "extreme" ? 10000 : severity === "high" ? 7000 : 5000,
+      position: severity === "extreme" ? "top-center" : "top-right" as ToastPosition
+    };
+
+    toast(message, toastOptions);
+  };
+
+
+  const getWeatherIcon = (condition?: string): string => {
+    const icons: Record<string, string> = {
+      clear: "☀️",
+      clouds: "☁️",
+      rain: "🌧️",
+      snow: "❄️",
+      thunderstorm: "⛈️",
+      atmosphere: "🌫️",
+      extreme: "⚠️"
+    };
+    return condition ? icons[condition.toLowerCase()] || "🌡️" : "🌡️";
+  };
+
   const markAllNotificationsAsRead = () => {
-    setNotifications((prev) => prev.map((notification) => ({ ...notification, read: true })))
-    setUnreadCount(0)
-  }
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+    setUnreadCount(0);
+  };
 
-  // Mark a single notification as read
   const markNotificationAsRead = (id: string) => {
-    setNotifications((prev) =>
-      prev.map((notification) => (notification.id === id ? { ...notification, read: true } : notification)),
-    )
-    setUnreadCount((prev) => Math.max(0, prev - 1))
-  }
+    setNotifications((prev) => 
+      prev.map((n) => n.id === id ? { ...n, read: true } : n)
+    );
+    setUnreadCount((prev) => Math.max(0, prev - 1));
+  };
 
-  return (
-    <div className="bg-gray-50 min-h-screen">
+    // Type-guard functions
+    const isSignificantWeatherChange = (tempChange: number): boolean => Math.abs(tempChange) > 5;
+    const isSignificantPriceChange = (percentage: number): boolean => Math.abs(percentage) >= 2;
+
+    return (
+      <div className="bg-gray-50 min-h-screen">
       <div className="flex">
         {/* Sidebar */}
         <aside className="hidden md:flex flex-col w-64 border-r bg-white h-screen sticky top-0">
@@ -405,9 +314,9 @@ export default function Dashboard() {
                         <div className="p-4 text-center text-sm text-gray-500">No notifications</div>
                       ) : (
                         <div className="max-h-80 overflow-auto">
-                          {notifications.map((notification) => (
+                          {notifications.map((notification,idx) => (
                             <DropdownMenuItem
-                              key={notification.id}
+                              key={idx}
                               className={`flex flex-col items-start p-3 ${notification.read ? "" : "bg-blue-50"}`}
                               onClick={() => markNotificationAsRead(notification.id)}
                             >
@@ -451,9 +360,9 @@ export default function Dashboard() {
               </div>
             </div>
           </header>
-          
-          {/* Dashboard Content */}
-          <div className="p-6 max-w-7xl mx-auto">
+      <div className="bg-gray-50 min-h-screen">
+        {/* Dashboard Content */}
+        <div className="p-6 max-w-7xl mx-auto">
             {/* Dashboard Header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
               <h1 className="text-3xl font-bold text-gray-900 mb-4 md:mb-0">Dashboard</h1>
@@ -478,57 +387,55 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-            
-            {/* Weather Section */}
-            <section id="weather" className="mb-8">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-gray-900">Weather</h2>
-                <Button variant="outline" size="sm" className="text-sm">
-                  View All
-                </Button>
+        {/* Weather Section */}
+        <section id="weather" className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-bold text-gray-900">Weather</h2>
+                  <Button variant="outline" size="sm" className="text-sm">
+                    View All
+                  </Button>
+          </div>
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 animate-pulse">
+                <div className="flex justify-between mb-4">
+                  <div className="h-6 w-24 bg-gray-200 rounded"></div>
+                  <div className="h-6 w-6 bg-gray-200 rounded-full"></div>
+                </div>
+                <div className="flex items-center">
+                  <div className="h-16 w-16 bg-gray-200 rounded-full mr-4"></div>
+                  <div>
+                    <div className="h-8 w-16 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-4 w-24 bg-gray-200 rounded"></div>
+                  </div>
+                </div>
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  <div>
+                    <div className="h-4 w-12 bg-gray-200 rounded mb-1"></div>
+                    <div className="h-4 w-8 bg-gray-200 rounded"></div>
+                  </div>
+                  <div>
+                    <div className="h-4 w-12 bg-gray-200 rounded mb-1"></div>
+                    <div className="h-4 w-8 bg-gray-200 rounded"></div>
+                  </div>
+                  <div>
+                    <div className="h-4 w-12 bg-gray-200 rounded mb-1"></div>
+                    <div className="h-4 w-8 bg-gray-200 rounded"></div>
+                  </div>
+                </div>
               </div>
-              
-              {loading ? (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 animate-pulse">
-                      <div className="flex justify-between mb-4">
-                        <div className="h-6 w-24 bg-gray-200 rounded"></div>
-                        <div className="h-6 w-6 bg-gray-200 rounded-full"></div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="h-16 w-16 bg-gray-200 rounded-full mr-4"></div>
-                        <div>
-                          <div className="h-8 w-16 bg-gray-200 rounded mb-2"></div>
-                          <div className="h-4 w-24 bg-gray-200 rounded"></div>
-                        </div>
-                      </div>
-                      <div className="mt-4 grid grid-cols-2 gap-2">
-                        <div>
-                          <div className="h-4 w-12 bg-gray-200 rounded mb-1"></div>
-                          <div className="h-4 w-8 bg-gray-200 rounded"></div>
-                        </div>
-                        <div>
-                          <div className="h-4 w-12 bg-gray-200 rounded mb-1"></div>
-                          <div className="h-4 w-8 bg-gray-200 rounded"></div>
-                        </div>
-                        <div>
-                          <div className="h-4 w-12 bg-gray-200 rounded mb-1"></div>
-                          <div className="h-4 w-8 bg-gray-200 rounded"></div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : error ? (
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                  <p className="text-red-500">{error}</p>
-                </div>
-              ) : weather ? (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            ))}
+          </div>
+          ) : error ? (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <p className="text-red-500">{error}</p>
+            </div>
+          ) : weather && weather.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {weather.map((cityWeather, idx) => (
                     <div key={idx} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                      {const test=}
+                      
                       <div className="flex justify-between items-center px-4 pt-4 pb-2">
                         <h3 className="font-semibold text-gray-900">
                           {cityWeather.name || cityWeather.message || "Location"}
@@ -575,50 +482,49 @@ export default function Dashboard() {
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center">
+          ) : (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center">
                   <p className="text-gray-500">No weather data available</p>
-                </div>
-              )}
-            </section>
-            
-            {/* Crypto Section */}
-            <section className="mb-8">
+            </div>
+          )}
+        </section>
+    
+        {/* Crypto Section */}
+        <section className="mb-8">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold text-gray-900">Cryptocurrency</h2>
                 <Button variant="outline" size="sm" className="text-sm">
                   View All
                 </Button>
               </div>
-              
-              {loading ? (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 animate-pulse">
-                      <div className="flex justify-between mb-4">
-                        <div>
-                          <div className="h-6 w-24 bg-gray-200 rounded mb-1"></div>
-                          <div className="h-4 w-12 bg-gray-200 rounded"></div>
-                        </div>
-                        <div className="h-6 w-6 bg-gray-200 rounded-full"></div>
-                      </div>
-                      <div className="flex justify-between items-baseline mb-4">
-                        <div className="h-8 w-20 bg-gray-200 rounded"></div>
-                        <div className="h-5 w-16 bg-gray-200 rounded"></div>
-                      </div>
-                      <div>
-                        <div className="h-4 w-24 bg-gray-200 rounded mb-1"></div>
-                        <div className="h-5 w-32 bg-gray-200 rounded"></div>
-                      </div>
-                    </div>
-                  ))}
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 animate-pulse">
+                <div className="flex justify-between mb-4">
+                  <div>
+                    <div className="h-6 w-24 bg-gray-200 rounded mb-1"></div>
+                    <div className="h-4 w-12 bg-gray-200 rounded"></div>
+                  </div>
+                  <div className="h-6 w-6 bg-gray-200 rounded-full"></div>
                 </div>
-              ) : error ? (
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                  <p className="text-red-500">{error}</p>
+                <div className="flex justify-between items-baseline mb-4">
+                  <div className="h-8 w-20 bg-gray-200 rounded"></div>
+                  <div className="h-5 w-16 bg-gray-200 rounded"></div>
                 </div>
-              ) : crypto && crypto.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <div className="h-4 w-24 bg-gray-200 rounded mb-1"></div>
+                  <div className="h-5 w-32 bg-gray-200 rounded"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+          ) : error ? (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <p className="text-red-500">{error}</p>
+            </div>
+          ) : crypto && crypto.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {crypto.map((coin) => (
                     <div key={coin.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                       <div className="flex justify-between items-start px-4 pt-4 pb-2">
@@ -650,46 +556,45 @@ export default function Dashboard() {
                         </div>
                       </div>
                     </div>
-                  ))}
+                    ))}
                 </div>
-              ) : (
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center">
-                  <p className="text-gray-500">No cryptocurrency data available</p>
-                </div>
-              )}
-            </section>
-            
-            {/* News Section */}
-            <section>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-gray-900">News</h2>
-                <Button variant="outline" size="sm" className="text-sm">
-                  View All
-                </Button>
-              </div>
-              
-              {loading ? (
-                <div className="space-y-4">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 animate-pulse">
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div className="md:col-span-1 h-32 bg-gray-200 rounded"></div>
-                        <div className="md:col-span-3">
-                          <div className="h-6 w-3/4 bg-gray-200 rounded mb-3"></div>
-                          <div className="h-4 w-full bg-gray-200 rounded mb-2"></div>
-                          <div className="h-4 w-full bg-gray-200 rounded mb-2"></div>
-                          <div className="h-4 w-1/2 bg-gray-200 rounded"></div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : error ? (
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                  <p className="text-red-500">{error}</p>
-                </div>
-              ) : news && news.length > 0 ? (
-                <div className="space-y-4">
+          ) : (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center">
+              <p className="text-gray-500">No cryptocurrency data available</p>
+            </div>
+          )}
+        </section>
+    
+        {/* News Section */}
+        <section>
+          <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-bold text-gray-900">News</h2>
+                  <Button variant="outline" size="sm" className="text-sm">
+                    View All
+                  </Button>
+          </div>
+          {loading ? (
+             <div className="space-y-4">
+             {[1, 2, 3].map((i) => (
+               <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 animate-pulse">
+                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                   <div className="md:col-span-1 h-32 bg-gray-200 rounded"></div>
+                   <div className="md:col-span-3">
+                     <div className="h-6 w-3/4 bg-gray-200 rounded mb-3"></div>
+                     <div className="h-4 w-full bg-gray-200 rounded mb-2"></div>
+                     <div className="h-4 w-full bg-gray-200 rounded mb-2"></div>
+                     <div className="h-4 w-1/2 bg-gray-200 rounded"></div>
+                   </div>
+                 </div>
+               </div>
+             ))}
+           </div>
+          ) : error ? (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <p className="text-red-500">{error}</p>
+            </div>
+          ) : news && news.length > 0 ? (
+            <div className="space-y-4">
                   {news.map((article, idx) => (
                     <div key={idx} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition duration-200">
                       <div className="p-4">
@@ -724,15 +629,16 @@ export default function Dashboard() {
                       </div>
                   ))}
                 </div>
-              ) : (
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center">
-                  <p className="text-gray-500">No news articles available</p>
-                </div>
-              )}
-            </section>
-          </div>
-        </main>
+          ) : (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center">
+              <p className="text-gray-500">No news articles available</p>
+            </div>
+          )}
+        </section>
       </div>
-    </div>
-  )
+      </div>
+      </main>
+      </div>
+      </div>
+    );
 }

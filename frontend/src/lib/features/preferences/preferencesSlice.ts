@@ -2,9 +2,12 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // 🌍 Predefined data
-const predefinedCities = ["New York", "London", "Tokyo"];
-const predefinedCryptos = ["Bitcoin", "Ethereum", "Solana"];
+export type PredefinedCity = "New York" | "London" | "Tokyo";
+export type PredefinedCrypto = "Bitcoin" | "Ethereum" | "Solana";
+const predefinedCities: PredefinedCity[] = ["New York", "London", "Tokyo"];
+const predefinedCryptos: PredefinedCrypto[] = ["Bitcoin", "Ethereum", "Solana"];
 
+// News types
 export type NewsArticle = {
   article_id: string;
   title: string;
@@ -45,6 +48,70 @@ export type NewsAPIResponse = {
   data: NewsData;
 };
 
+// Weather types
+export type WeatherData = {
+  name: string;
+  message?: string;
+  coord: { lon: number; lat: number };
+  weather: Array<{
+    id: number;
+    main: string;
+    description: string;
+    icon: string;
+  }>;
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
+  };
+  wind: { speed: number; deg: number };
+};
+
+// Crypto types
+export type CryptoCurrency = {
+  id: string;
+  rank: string;
+  symbol: string;
+  name: string;
+  supply: string;
+  maxSupply: string | null;
+  marketCapUsd: string;
+  volumeUsd24Hr: string;
+  priceUsd: string;
+  changePercent24Hr: string;
+  vwap24Hr: string;
+  explorer: string;
+};
+
+// Thunk response types
+type FetchWeatherPayload = Array<{ city: PredefinedCity } & WeatherData>;
+type FetchCryptoPayload = CryptoCurrency[];
+type FetchNewsPayload = NewsArticle[];
+
+// State type
+export type PreferencesState = {
+  favoriteCities: string[];
+  favoriteCryptos: string[];
+  weather: WeatherData[];
+  crypto: CryptoCurrency[];
+  news: NewsArticle[];
+  loading: boolean;
+  error: string | null;
+};
+
+// 🗂️ Initial State
+const initialState: PreferencesState = {
+  favoriteCities: [],
+  favoriteCryptos: [],
+  weather: [],
+  crypto: [],
+  news: [],
+  loading: false,
+  error: null,
+};
 
 // 🌤️ Fetch weather data
 export const fetchWeather = createAsyncThunk("weather/fetch", async (_, { rejectWithValue }) => {
@@ -89,49 +156,6 @@ export const fetchNews = createAsyncThunk("news/fetch", async (_, { rejectWithVa
     return rejectWithValue("Failed to fetch news data. in async thug");
   }
 });
-
-// 🗂️ Initial State
-const initialState = {
-    favoriteCities: [] as string[],
-    favoriteCryptos: [] as string[],
-    weather: [] as {
-        name: string;
-        message?: string;
-        coord: { lon: number; lat: number };
-        weather: Array<{
-          id: number;
-          main: string;
-          description: string;
-          icon: string;
-        }>;
-        main: {
-          temp: number;
-          feels_like: number;
-          temp_min: number;
-          temp_max: number;
-          pressure: number;
-          humidity: number;
-        };
-        wind: { speed: number; deg: number };
-      }[],
-    crypto: [] as {
-      id: string;
-      rank: string;
-      symbol: string;
-      name: string;
-      supply: string;
-      maxSupply: string | null;
-      marketCapUsd: string;
-      volumeUsd24Hr: string;
-      priceUsd: string;
-      changePercent24Hr: string;
-      vwap24Hr: string;
-      explorer: string;
-    }[],
-    news:[] as unknown as NewsArticle[],
-    loading: false,
-    error: null as string | null,
-  };
   
 
 // 🏗️ Create Slice
