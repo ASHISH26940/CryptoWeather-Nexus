@@ -39,7 +39,7 @@ interface Notification {
 
 export default function Dashboard() {
   const dispatch = useAppDispatch();
-  const { weather, crypto, news, loading, error } = useAppSelector((state) => state.preferences);
+  const { weather, crypto, news, loading, error } = useAppSelector((state) => state.preferences);//yaha se
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [activeTab, setActiveTab] = useState("all");
@@ -605,7 +605,7 @@ export default function Dashboard() {
                               <Image
                                 src={article.image_url || "/placeholder.svg"}
                                 alt={article.title}
-                                className="w-full h-32 object-cover rounded-lg"
+                                className="w-full h-32 object-cover rounded-lg relative"
                               />
                             </div>
                           )}

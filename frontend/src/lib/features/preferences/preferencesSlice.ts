@@ -145,20 +145,20 @@ export const fetchWeather = createAsyncThunk("weather/fetch", async (_, { reject
     return rejectWithValue("Failed to fetch weather data.");
   }
 });
-type Crypto = {
-  id: string;
-  symbol: string;
-  name: string;
-  marketCapUsd: string;
-  priceUsd: string;
-  changePercent24Hr: string;
-};
+// type Crypto = {
+//   id: string;
+//   symbol: string;
+//   name: string;
+//   marketCapUsd: string;
+//   priceUsd: string;
+//   changePercent24Hr: string;
+// };
 // 💰 Fetch cryptocurrency data
 export const fetchCrypto = createAsyncThunk("crypto/fetch", async (_, { rejectWithValue }) => {
   try {
     const { data } = await axios.get(`${BACKEND_URI}/crypto/currencies`);
     console.log("crypto data : ",data);
-    
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return data.data.filter((crypto:any) => predefinedCryptos.includes(crypto.name));
   } catch (error) {
     console.log("error",error);
