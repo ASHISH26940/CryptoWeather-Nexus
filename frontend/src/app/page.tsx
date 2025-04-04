@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Bell, CloudSun, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Image from "next/image";
+// import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast,ToastPosition } from "react-hot-toast";
 import {
   DropdownMenu,
@@ -448,7 +449,7 @@ export default function Dashboard() {
                         <div className="flex items-center">
                           {cityWeather.weather?.[0]?.icon && (
                             <div className="mr-3">
-                              <img
+                              <Image
                                 src={`https://openweathermap.org/img/wn/${cityWeather.weather[0].icon}@2x.png`}
                                 alt={cityWeather.weather[0].description || "Weather icon"}
                                 width={64}
@@ -601,7 +602,7 @@ export default function Dashboard() {
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                           {article.image_url && (
                             <div className="md:col-span-1">
-                              <img
+                              <Image
                                 src={article.image_url || "/placeholder.svg"}
                                 alt={article.title}
                                 className="w-full h-32 object-cover rounded-lg"

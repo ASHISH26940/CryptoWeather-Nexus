@@ -1,4 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+"use client";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // 🌍 Predefined data
@@ -6,6 +7,13 @@ export type PredefinedCity = "New York" | "London" | "Tokyo";
 export type PredefinedCrypto = "Bitcoin" | "Ethereum" | "Solana";
 const predefinedCities: PredefinedCity[] = ["New York", "London", "Tokyo"];
 const predefinedCryptos: PredefinedCrypto[] = ["Bitcoin", "Ethereum", "Solana"];
+
+if(!process.env.NEXT_PUBLIC_BACKEND_URI){
+  throw new Error("BACKEND_URI is not defined in .env file");
+}
+export const BACKEND_URI=process.env.NEXT_PUBLIC_BACKEND_URI;
+console.log("backend uri",BACKEND_URI);
+
 
 // News types
 export type NewsArticle = {
@@ -87,9 +95,9 @@ export type CryptoCurrency = {
 };
 
 // Thunk response types
-type FetchWeatherPayload = Array<{ city: PredefinedCity } & WeatherData>;
-type FetchCryptoPayload = CryptoCurrency[];
-type FetchNewsPayload = NewsArticle[];
+// type FetchWeatherPayload = Array<{ city: PredefinedCity } & WeatherData>;
+// type FetchCryptoPayload = CryptoCurrency[];
+// type FetchNewsPayload = NewsArticle[];
 
 // State type
 export type PreferencesState = {
@@ -116,9 +124,11 @@ const initialState: PreferencesState = {
 // 🌤️ Fetch weather data
 export const fetchWeather = createAsyncThunk("weather/fetch", async (_, { rejectWithValue }) => {
   try {
+    console.log(BACKEND_URI);
+    
     const responses = await Promise.all(
       predefinedCities.map(async (city) => {
-        const { data } = await axios.post(`http://localhost:3001/weather/location/lat_lon`, { 
+        const { data } = await axios.post(`${BACKEND_URI}/weather/location/lat_lon`, { 
             location:city
          });
          //console.log(data);
@@ -126,19 +136,33 @@ export const fetchWeather = createAsyncThunk("weather/fetch", async (_, { reject
         return { city, ...data.weather };
       })
     );
+    console.log("weather data",responses);
+    
     return responses;
   } catch (error) {
+    console.log("error",error);
+    
     return rejectWithValue("Failed to fetch weather data.");
   }
 });
-
+type Crypto = {
+  id: string;
+  symbol: string;
+  name: string;
+  marketCapUsd: string;
+  priceUsd: string;
+  changePercent24Hr: string;
+};
 // 💰 Fetch cryptocurrency data
 export const fetchCrypto = createAsyncThunk("crypto/fetch", async (_, { rejectWithValue }) => {
   try {
-    const { data } = await axios.get(`http://localhost:3001/crypto/currencies`);
-    //console.log(data);
-    return data.data.filter((crypto: any) => predefinedCryptos.includes(crypto.name));
+    const { data } = await axios.get(`${BACKEND_URI}/crypto/currencies`);
+    console.log("crypto data : ",data);
+    
+    return data.data.filter((crypto:any) => predefinedCryptos.includes(crypto.name));
   } catch (error) {
+    console.log("error",error);
+    
     return rejectWithValue("Failed to fetch cryptocurrency data.");
   }
 });
@@ -146,13 +170,15 @@ export const fetchCrypto = createAsyncThunk("crypto/fetch", async (_, { rejectWi
 // 📰 Fetch news data
 export const fetchNews = createAsyncThunk("news/fetch", async (_, { rejectWithValue }) => {
   try {
-    const { data } = await axios.get(`http://localhost:3001/news/current_news`);
+    const { data } = await axios.get(`${BACKEND_URI}/news/current_news`);
     console.log(" slice side",data);
     const test=data.data.results;
     console.log("test",test);
     
     return test;
   } catch (error) {
+    console.log("error",error);
+    
     return rejectWithValue("Failed to fetch news data. in async thug");
   }
 });
